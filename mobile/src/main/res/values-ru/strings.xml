@@ -4,4 +4,18 @@
     <string name="action_add">Добавить</string>
     <string name="action_update">Обновить</string>
     <string name="about_n_help">О приложении &amp; Справка</string>
+    <string name="about_n_help_info">Часто задаваемые вопросы, Контакты, Политика приватности и Лицензия</string>
+    <string name="attention">Внимание</string>
+    <string name="ra_add_collect_server">Добавить сервер</string>
+    <string name="ra_blank">Пустая</string>
+    <string name="cancel">Отменить</string>
+    <string name="create_pass_info">Для обеспечения максимальной безопасности, пожалуйста, задайте графический ключ для защиты входа в приложение. Он будет использован для входа в приложение Tella при каждом запуске, чтобы никто кроме Вас не мог получить доступ к данным. Ключ должна соединять минимум 6 точек.</string>
+    <string name="contact_us">Свяжитесь с нами</string>
+    <string name="copyright">Все права защищены © 2019 Horizontal</string>
+    <string name="ra_collect">Collect</string>
+    <string name="download_in_progress">Загрузка в процессе…</string>
+    <string name="download_completed">Загрузка завершена.</string>
+    <string name="delete">Удалить</string>
+    <string name="ra_draft">Черновик</string>
+    <string name="ra_download">Загрузить</string>
     </resources>
