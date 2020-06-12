@@ -313,9 +313,7 @@ del formulario</string>
     <string name="passcode">Código de acceso</string>
     <string name="collect_help">Ayuda de Recopilar</string>
     <string name="collect_help_info">Recopilar es una herramienta para recopilar datos llenando formularios directamente en su dispositivo</string>
-    <string name="collect_help_server_info"><![CDATA[Para recibir formularios y enviar datos, primero debe conectarse a un servidor. Solicite a la organización patrocinadora la información del servidor y <a href=\"tella_scheme://open.collect.manage.servers.activity\">configure el servidor aquí.</a>]]></string>
-    <string name="collect_help_odk"><![CDATA[Si desea crear sus propios formularios, <a href=\"https://hzontal.org/contact/\">contáctenos</a> o use <a href=\"https://opendatakit.org/help/help-for-hire/\">cualquier servicio basado en el Open Data Kit (ODK)</a>]]></string>
-    <string name="collect_help_connectivity">Si no está conectado a Internet, todavía puede llenar formularios y guardarlos para enviar cuando está conectado.</string>
+    <string name="default_panic_message">Help me I\'m in trouble</string>
     <string name="not_connected_message">No estás conectado a internet. Inténtalo de nuevo cuando estés conectado.</string>
     <string name="crash_reports_submit">Compartir informes de fallos</string>
     <string name="crash_reports_submit_desc">Los informes de fallos nos ayudan a mejorar Tella. Se envían automáticamente e incluyen datos como el modelo del dispositivo y la versión de Android.</string>
@@ -401,6 +399,10 @@ del formulario</string>
     <string name="remove_signature">Quitar la firma</string>
     <string name="error_saving_signature">Hubo un error al guardar la firma</string>
     <string name="trigger">OK. Por favor, continúe.</string>
+    <plurals name="ra_form_elements_count">
+        <item quantity="one">%d elemento</item>
+        <item quantity="other">%d elementos</item>
+    </plurals>
     <string name="documentation">Documentación</string>
     <string name="protection">Protección</string>
     <string name="learn_more">Aprende más</string>
@@ -437,12 +439,10 @@ del formulario</string>
     <string name="disable_collect_info">Estás a punto de deshabilitar Recopilar. Puede mantener la configuración de los servidores y formularios o eliminar todo.</string>
     <string name="hide">Ocultar</string>
     <string name="deleted_servers_and_forms">Se han eliminado formularios y servidores</string>
-    <plurals name="ra_form_elements_count">
-        <item quantity="one">%d elemento</item>
-        <item quantity="other">%d elementos</item>
-    </plurals>
-    <string name="default_panic_message">Help me I\'m in trouble</string>
     <string name="licenses">Licencias</string>
+    <string name="collect_help_server_info"><![CDATA[Para recibir formularios y enviar datos, primero debe conectarse a un servidor. Solicite a la organización patrocinadora la información del servidor y <a href=\"tella_scheme://open.collect.manage.servers.activity\">configure el servidor aquí.</a>]]></string>
+    <string name="collect_help_odk"><![CDATA[Si desea crear sus propios formularios, <a href=\"https://hzontal.org/contact/\">contáctenos</a> o use <a href=\"https://opendatakit.org/help/help-for-hire/\">cualquier servicio basado en el Open Data Kit (ODK)</a>]]></string>
+    <string name="collect_help_connectivity">Si no está conectado a Internet, todavía puede llenar formularios y guardarlos para enviar cuando está conectado.</string>
     <string name="phone_number">Phone number</string>
     <string name="set_panic_button">YOU CANNOT USE THE PANIC BUTTON UNTIL YOU SET IT UP. YOU MUST AT LEAST ADD ONE TRUSTED CONTACT</string>
     <string name="panic_message_title">Your quick exit message will be sent by SMS to your Circle of Trust when you activate Quick Exit Mode. Make sure it is clear and to the point. Consider using code language in case your SMS is intercepted.</string>
