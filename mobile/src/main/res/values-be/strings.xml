@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Tella</string>
     <string name="action_search">Пошук</string>
     <string name="action_add">Дадаць</string>
@@ -208,13 +207,13 @@
         <item quantity="many">%1$s Фота</item>
         <item quantity="other">%1$s Фота</item>
     </plurals>
-    <plurals name="video_number" tools:ignore="MissingQuantity">
+    <plurals name="video_number">
         <item quantity="one">%d Відэа</item>
         <item quantity="few">%1$s Відэа</item>
         <item quantity="many">%1$s Відэа</item>
         <item quantity="other">%1$s Відэа</item>
     </plurals>
-    <plurals name="audio_number" tools:ignore="MissingQuantity">
+    <plurals name="audio_number">
         <item quantity="one">%1$s Аўдыё</item>
         <item quantity="few">%1$s Аўдыё</item>
         <item quantity="many">%1$s Аўдыё</item>
@@ -323,9 +322,7 @@
     <string name="passcode">Пароль</string>
     <string name="collect_help">Даведка Збору</string>
     <string name="collect_help_info">Збор - гэта інструмент для збору дадзеных з дапамогай запаўнення анкет і апытанняў непасрэдна на вашай прыладзе</string>
-    <string name="collect_help_server_info"><![CDATA[Для атрымання формаў і адпраўкі дадзеных неабходна спачатку злучыцца з сэрвэрам. Спытайце ў сваёй арганізацыі інфармацыю аб серверы і наладзьце <a href=\"tella_scheme://open.collect.manage.servers.activity\"> сервер тут </a> .]]></string>
-    <string name="collect_help_odk"><![CDATA[Калі Вы хочаце стварыць свае ўласныя формы, <a href=\"https://hzontal.org/contact/\"> звяжыцеся з намі </a> або выкарыстоўвайце <a href=\"https://opendatakit.org/help/help-for-hire/\"> любую прыладу на аснове Open Data Kit (ODK) </a>]]></string>
-    <string name="collect_help_connectivity">Калі Вы не падлучаныя да Інтэрнэту, Вы ўсё роўна можаце запаўняць формы і захоўваць іх для адпраўкі пасля выхаду ў Інтэрнэт.</string>
+    <string name="default_panic_message">Дапамажы мне. Я ў бядзе</string>
     <string name="not_connected_message">Вы не далучаныя да Інтэрнэту. Паспрабуйце яшчэ раз пры падключэнні.</string>
     <string name="crash_reports_submit">Падзяліцца справаздачамі аб збоях</string>
     <string name="crash_reports_submit_desc">Справаздачы аб збоях дапамагаюць нам палепшыць Tella. Яны адпраўляюцца аўтаматычна і ўтрымліваюць такія дадзеныя, як мадэль прылады і версія Android.</string>
@@ -411,6 +408,12 @@
     <string name="remove_signature">Выдаліць подпіс</string>
     <string name="error_saving_signature">Пры захаванні подпісу адбылася памылка</string>
     <string name="trigger">OK. Калі ласка, працягвайце.</string>
+    <plurals name="ra_form_elements_count">
+        <item quantity="one">%d Адзін</item>
+        <item quantity="few">Некалькі</item>
+        <item quantity="many">Шмат</item>
+        <item quantity="other">%d Іншыя</item>
+    </plurals>
     <string name="documentation">Дакументацыя</string>
     <string name="protection">Абарона</string>
     <string name="learn_more">Даведайцеся больш</string>
@@ -447,14 +450,10 @@
     <string name="disable_collect_info">Вы збіраецеся адключыць збор. Вы можаце захаваць налады і формы сервера альбо выдаліць усё.</string>
     <string name="hide">Схаваць</string>
     <string name="deleted_servers_and_forms">Формы і серверы былі выдалены</string>
-    <plurals name="ra_form_elements_count">
-        <item quantity="one">%d Адзін</item>
-        <item quantity="few">Некалькі</item>
-        <item quantity="many">Шмат</item>
-        <item quantity="other">%d Іншыя</item>
-    </plurals>
-    <string name="default_panic_message">Дапамажы мне. Я ў бядзе</string>
     <string name="licenses">Дазвалення</string>
+    <string name="collect_help_server_info"><![CDATA[Для атрымання формаў і адпраўкі дадзеных неабходна спачатку злучыцца з сэрвэрам. Спытайце ў сваёй арганізацыі інфармацыю аб серверы і наладзьце <a href=\"tella_scheme://open.collect.manage.servers.activity\"> сервер тут </a> .]]></string>
+    <string name="collect_help_odk"><![CDATA[Калі Вы хочаце стварыць свае ўласныя формы, <a href=\"https://hzontal.org/contact/\"> звяжыцеся з намі </a> або выкарыстоўвайце <a href=\"https://opendatakit.org/help/help-for-hire/\"> любую прыладу на аснове Open Data Kit (ODK) </a>]]></string>
+    <string name="collect_help_connectivity">Калі Вы не падлучаныя да Інтэрнэту, Вы ўсё роўна можаце запаўняць формы і захоўваць іх для адпраўкі пасля выхаду ў Інтэрнэт.</string>
     <string name="phone_number">Нумар тэлефона</string>
     <string name="set_panic_button">Вы не можаце выкарыстоўваць панічную кнопку, пакуль вы яе не ўсталюеце. Вы павінны дадаць адзін давераны кантакт</string>
     <string name="panic_message_title">Экстраннае паведамленне будзе адпраўлена па SMS вашаму кругу даверу, калі вы ўключыце рэжым хуткага выхаду. Пераканайцеся, што паведамленне зразумелае і дакладнае. Паспрабуйце выкарыстоўваць шыфр на выпадак, калі ваша SMS будзе перахоплена.</string>
@@ -478,10 +477,10 @@
     <string name="gps_metadata_dialog_info">Рэжым праверкі ўключаны, але GPS адключаны. Уключыце GPS.</string>
     <string name="ignore">Ігнараваць</string>
     <string name="turn_on_gps">Уключыце GPS</string>
+    <string name="attachments_empty_text">Няма файлаў для паказу.</string>
     <string name="update_in_progress">Працягваецца абнаўленне …</string>
     <string name="canceled">Адменена</string>
     <string name="update_completed">Абнаўленне завершана.</string>
-    <string name="attachments_empty_text">Няма файлаў для паказу.</string>
     <string name="share_dialog_title">Падзяліцца праверачнай інфармацыяй</string>
     <string name="share_dialog_text">Адзін ці некалькі абраных файлаў утрымліваюць дадзеныя праверкі, уключаючы інфармацыю пра прыладу, сетку і геапазіцыю. Дзяліцеся толькі, калі гэта не ставіць вас пад пагрозу.</string>
     <string name="share_dialog_btn_metadata">Падзяліцца медыя-інфармацыяй + інфармацыяй верыфікацыі</string>
