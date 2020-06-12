@@ -522,4 +522,7 @@
     <string name="minus15">-15s</string>
     <string name="days_hours_and_space_left">%1$d days %2$d hours (%3$s) left</string>
     <string name="hours_minutes_and_space_left">%1$d hours %2$d min (%3$s) left</string>
+    <string name="upload_information">Upload information</string>
+    <string name="number_of_files">Number of files</string>
+    <string name="date_started">Date started</string>
 </resources>
