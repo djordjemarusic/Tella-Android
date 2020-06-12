@@ -533,4 +533,4 @@
     <string name="minus15">-15s</string>
     <string name="days_hours_and_space_left">%1$d дзён %2$d гадзін (%3$s) засталося</string>
     <string name="hours_minutes_and_space_left">%1$d гадзін %2$d мін (%3$s) засталося</string>
-</resources>
+    </resources>
