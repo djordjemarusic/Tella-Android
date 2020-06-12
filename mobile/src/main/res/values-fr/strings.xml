@@ -1,20 +1,4 @@
 <resources>
-    <plurals name="photo_number">
-        <item quantity="one">%1$s photo</item>
-        <item quantity="other">%1$s photos</item>
-    </plurals>
-    <plurals name="video_number">
-        <item quantity="one">%1$s vidéo</item>
-        <item quantity="other">%1$s vidéos</item>
-    </plurals>
-    <plurals name="audio_number">
-        <item quantity="one">%1$s enregistrement audio</item>
-        <item quantity="other">%1$s enregistrements audio</item>
-    </plurals>
-    <plurals name="ra_form_elements_count">
-        <item quantity="one">%d élément</item>
-        <item quantity="other">%d éléments</item>
-    </plurals>
     <string name="app_name">Tella</string>
     <string name="action_search">Rechercher</string>
     <string name="action_add">Ajouter</string>
@@ -218,6 +202,18 @@
     <string name="ra_contact_settings">Contact</string>
     <string name="ra_prevent_blocking">Contourner le blocage</string>
     <string name="ra_prevent_blocking_desc">Activez cette option uniquement si vous il y a des tentatives de blocage de Tella dans votre région ou votre pays.</string>
+    <plurals name="photo_number">
+        <item quantity="one">%1$s photo</item>
+        <item quantity="other">%1$s photos</item>
+    </plurals>
+    <plurals name="video_number">
+        <item quantity="one">%1$s vidéo</item>
+        <item quantity="other">%1$s vidéos</item>
+    </plurals>
+    <plurals name="audio_number">
+        <item quantity="one">%1$s enregistrement audio</item>
+        <item quantity="other">%1$s enregistrements audio</item>
+    </plurals>
     <string name="title_activity_archive">Archiver</string>
     <string name="ra_preferred_method">Méthode préférée</string>
     <string name="ra_recommended">Recommandé</string>
@@ -318,9 +314,7 @@
     <string name="passcode">Code d’accès</string>
     <string name="collect_help">Aide pour Collecte</string>
     <string name="collect_help_info">Collecte est un outil pour collecter des données en remplissant des formulaires directement sur votre appareil</string>
-    <string name="collect_help_server_info"><![CDATA[Pour recevoir des formulaires et envoyer des données, vous devez d\'abord vous connecter à un serveur. Demandez à votre organisation les informations sur le serveur et <a href=\"tella_scheme://open.collect.manage.servers.activity\"> configurez le serveur ici. </a>]]></string>
-    <string name="collect_help_odk"><![CDATA[Si vous souhaitez créer vos propres formulaires, <a href=\"https://hzontal.org/contact/\">contactez-nous</a> ou utilisez <a href=\"https://opendatakit.org/help/help-for-hire/\">n’importe quel service basé sur l’Open Data Kit (ODK)</a>]]></string>
-    <string name="collect_help_connectivity">Si vous n\'êtes pas connecté à Internet, vous pouvez toujours remplir des formulaires et les sauvegarder pour les envoyer une fois connecté.</string>
+    <string name="default_panic_message">Help me I\'m in trouble</string>
     <string name="not_connected_message">Vous n\'êtes pas connecté à Internet. Réessayez une fois connecté.</string>
     <string name="crash_reports_submit">Envoyer les rapports de bug</string>
     <string name="crash_reports_submit_desc">Les rapports de bug nous aident à améliorer la Tella. Ils sont envoyés automatiquement et incluent des données telles que le modèle de votre appareil et la version Android.</string>
@@ -406,6 +400,10 @@
     <string name="remove_signature">Supprimer la signature</string>
     <string name="error_saving_signature">Une erreur s\'est produite lors de l\'enregistrement de la signature</string>
     <string name="trigger">OK. Veuillez poursuivre.</string>
+    <plurals name="ra_form_elements_count">
+        <item quantity="one">%d élément</item>
+        <item quantity="other">%d éléments</item>
+    </plurals>
     <string name="documentation">Documentation</string>
     <string name="protection">Protection</string>
     <string name="learn_more">En savoir plus</string>
@@ -442,8 +440,10 @@
     <string name="disable_collect_info">Vous êtes sur le point de désactiver la collecte de données. Vous pouvez conserver les paramètres des serveurs et formulaires ou tout supprimer.</string>
     <string name="hide">Masquer</string>
     <string name="deleted_servers_and_forms">Les formulaires et serveurs ont été supprimés</string>
-    <string name="default_panic_message">Help me I\'m in trouble</string>
     <string name="licenses">Licences</string>
+    <string name="collect_help_server_info"><![CDATA[Pour recevoir des formulaires et envoyer des données, vous devez d\'abord vous connecter à un serveur. Demandez à votre organisation les informations sur le serveur et <a href=\"tella_scheme://open.collect.manage.servers.activity\"> configurez le serveur ici. </a>]]></string>
+    <string name="collect_help_odk"><![CDATA[Si vous souhaitez créer vos propres formulaires, <a href=\"https://hzontal.org/contact/\">contactez-nous</a> ou utilisez <a href=\"https://opendatakit.org/help/help-for-hire/\">n’importe quel service basé sur l’Open Data Kit (ODK)</a>]]></string>
+    <string name="collect_help_connectivity">Si vous n\'êtes pas connecté à Internet, vous pouvez toujours remplir des formulaires et les sauvegarder pour les envoyer une fois connecté.</string>
     <string name="phone_number">Phone number</string>
     <string name="set_panic_button">YOU CANNOT USE THE PANIC BUTTON UNTIL YOU SET IT UP. YOU MUST AT LEAST ADD ONE TRUSTED CONTACT</string>
     <string name="panic_message_title">Your quick exit message will be sent by SMS to your Circle of Trust when you activate Quick Exit Mode. Make sure it is clear and to the point. Consider using code language in case your SMS is intercepted.</string>
@@ -467,10 +467,10 @@
     <string name="gps_metadata_dialog_info">Le mode de vérification est activé mais le GPS est désactivé. Activez le GPS pour capturer la géolocalisation de vos preuves.</string>
     <string name="ignore">Ignorer</string>
     <string name="turn_on_gps">Activer le GPS</string>
+    <string name="attachments_empty_text">There are no files to show.</string>
     <string name="update_in_progress">Upadate in progress…</string>
     <string name="canceled">Canceled</string>
     <string name="update_completed">Update completed.</string>
-    <string name="attachments_empty_text">There are no files to show.</string>
     <string name="share_dialog_title">Share verification information</string>
     <string name="share_dialog_text">One or several selected files contain verification data, including device, network and geolocation information. Only share if this will not put you at risk.</string>
     <string name="share_dialog_btn_metadata">Share media + verification information</string>
@@ -521,6 +521,6 @@
     <string name="ra_file_already_on_server">File already on server</string>
     <string name="plus15">+15s</string>
     <string name="minus15">-15s</string>
-   <string name="days_hours_and_space_left">%1$d days %2$d hours (%3$s) left</string>
-   <string name="hours_minutes_and_space_left">%1$d hours %2$d min (%3$s) left</string>
+    <string name="days_hours_and_space_left">%1$d days %2$d hours (%3$s) left</string>
+    <string name="hours_minutes_and_space_left">%1$d hours %2$d min (%3$s) left</string>
 </resources>
