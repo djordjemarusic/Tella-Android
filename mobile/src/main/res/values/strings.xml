@@ -367,4 +367,6 @@
     <string name="video_quality_high">High (~1080p)</string>
     <string name="video_quality_medium">Medium (~720p)</string>
     <string name="video_quality_low">Low (~480p)</string>
+    <string name="less_than_a_minute_left">less than a minute left</string>
+    <string name="confirm_delete_upload_information">Are you sure you want to delete the upload information?</string>stopped
 </resources>
