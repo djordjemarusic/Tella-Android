@@ -73,7 +73,7 @@ public class CollectCreateFormControllerPresenter implements
 
         // Remove previous forms
        // ReferenceManager.__().clearSession();
-        ReferenceManager._().clearSession();
+        ReferenceManager.__().clearSession();
 
         // This should get moved to the Application Class
         /*if (ReferenceManager._().getFactories().length == 0) {
