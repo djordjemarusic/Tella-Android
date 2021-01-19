@@ -1670,6 +1670,9 @@ public class DataSource implements IServersRepository, ITellaUploadServersReposi
 
     private List<CollectFormInstance> getSubmitCollectFormInstances() {
         return getCollectFormInstances(new CollectFormInstanceStatus[]{
+                CollectFormInstanceStatus.UNKNOWN,
+                CollectFormInstanceStatus.DRAFT,
+
                 CollectFormInstanceStatus.FINALIZED,
                 CollectFormInstanceStatus.SUBMITTED,
                 CollectFormInstanceStatus.SUBMISSION_ERROR,
@@ -1715,18 +1718,20 @@ public class DataSource implements IServersRepository, ITellaUploadServersReposi
                             D.C_FORM_PART_STATUS,
                             cn(D.T_COLLECT_SERVER, D.C_NAME, D.A_SERVER_NAME),
                             cn(D.T_COLLECT_SERVER, D.C_USERNAME, D.A_SERVER_USERNAME)},
-                    D.C_STATUS + " IN " + selection,
+                    "1 = 1", //null,//+++++D.C_STATUS + " IN " + selection
                     null, null,
                     cn(D.T_COLLECT_FORM_INSTANCE, D.C_ID) + " DESC",
                     null
             );
 
             cursor = database.rawQuery(query, null);
-
+            Timber.d("+++++ listing submitted forms");
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                 // todo: this is bad, we need to make this not loading everything in loop
                 CollectFormInstance instance = cursorToCollectFormInstance(cursor);
                 instance.setFormDef(deserializeFormDef(cursor.getBlob(cursor.getColumnIndexOrThrow(D.C_FORM_DEF))));
+
+                Timber.d("+++++ %d form %s, status %s ", instance.getId(), instance.getFormName(),  instance.getStatus().name());
 
                 List<FormMediaFile> mediaFiles = getFormInstanceMediaFilesFromDb(instance.getId());
                 for (FormMediaFile mediaFile : mediaFiles) {
@@ -1747,6 +1752,7 @@ public class DataSource implements IServersRepository, ITellaUploadServersReposi
     }
 
     private CollectFormInstance updateCollectFormInstance(CollectFormInstance instance) {
+
         try {
             int statusOrdinal;
             ContentValues values = new ContentValues();
@@ -1754,6 +1760,7 @@ public class DataSource implements IServersRepository, ITellaUploadServersReposi
             if (instance.getId() > 0) {
                 values.put(D.C_ID, instance.getId());
             }
+            Timber.d("+++++ DataSource updateCollectFormInstance");
 
             values.put(D.C_COLLECT_SERVER_ID, instance.getServerId());
             values.put(D.C_FORM_ID, instance.getFormID());
@@ -1768,6 +1775,7 @@ public class DataSource implements IServersRepository, ITellaUploadServersReposi
             } else {
                 statusOrdinal = instance.getStatus().ordinal();
             }
+            Timber.d("+++++ FormName %s, InstanceName %s, FormPartStatus %s", instance.getFormName(), instance.getInstanceName(), instance.getFormPartStatus().name());
             values.put(D.C_STATUS, statusOrdinal);
 
             if (instance.getFormDef() != null) {
@@ -1782,6 +1790,7 @@ public class DataSource implements IServersRepository, ITellaUploadServersReposi
                     null,
                     values,
                     SQLiteDatabase.CONFLICT_REPLACE);
+            Timber.d("+++++ database.insertWithOnConflict instance id %d", id);
             instance.setId(id);
 
             // clear FormMediaFiles
@@ -1803,11 +1812,12 @@ public class DataSource implements IServersRepository, ITellaUploadServersReposi
 
             database.setTransactionSuccessful();
         } catch (IOException e) {
+            Timber.d("+++++".concat(e.getLocalizedMessage()), getClass().getName());
             Timber.d(e, getClass().getName());
         } finally {
             database.endTransaction();
         }
-
+        Timber.d("+++++ form %s,  status %s", instance.getFormName(), instance.getStatus().name());
         return instance;
     }
 

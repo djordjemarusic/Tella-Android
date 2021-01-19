@@ -36,6 +36,7 @@ import rs.readahead.washington.mobile.odk.FormController;
 import rs.readahead.washington.mobile.util.C;
 import rs.readahead.washington.mobile.util.ThreadUtil;
 import rs.readahead.washington.mobile.util.Util;
+import timber.log.Timber;
 
 
 public class FormSubmitter implements IFormSubmitterContract.IFormSubmitter {
@@ -216,18 +217,19 @@ public class FormSubmitter implements IFormSubmitterContract.IFormSubmitter {
         if (instance.getStatus() == CollectFormInstanceStatus.UNKNOWN || instance.getStatus() == CollectFormInstanceStatus.DRAFT) {
             instance.setStatus(CollectFormInstanceStatus.FINALIZED);
         }
-
+        Timber.d("+++++ finalizeFormInstance, instance: %s, %d, status %s", instance.getFormName(), instance.getId(), instance.getStatus().name());
         return dataSource.saveInstance(instance).flatMap(
                 (Function<CollectFormInstance, SingleSource<CollectServer>>) instance1 ->
                         dataSource.getCollectServer(instance1.getServerId())
         );
+
     }
 
     private Single<CollectFormInstance> finalizeAndSaveFormInstance(DataSource dataSource, CollectFormInstance instance) {
         // finalize form (FormDef & CollectFormInstance)
         instance.getFormDef().postProcessInstance();
         instance.setStatus(CollectFormInstanceStatus.SUBMISSION_PENDING);
-
+        Timber.d("+++++ finalizeAndSaveFormInstance, instance: %s, %d, status %s", instance.getFormName(), instance.getId(), instance.getStatus().name());
         return dataSource.saveInstance(instance);
     }
 
@@ -240,7 +242,7 @@ public class FormSubmitter implements IFormSubmitterContract.IFormSubmitter {
         if (!MyApplication.isConnectedToInternet(view.getContext())) {
             throw new NoConnectivityException();
         }
-
+        Timber.d("+++++ negotiateServer, server: %s, %d", server.getName(), server.getId());
         return openRosaRepository.submitFormNegotiate(server);
     }
 
@@ -310,7 +312,7 @@ public class FormSubmitter implements IFormSubmitterContract.IFormSubmitter {
                 }
             }
         }
-
+        Timber.d("++++++ setPartSuccessSubmissionStatuses, instance: %s, %d,  partName %s, status: %s", instance.getFormName(), instance.getId(), partName, instance.getStatus().name());
         instance.setStatus(status);
     }
 
@@ -324,7 +326,7 @@ public class FormSubmitter implements IFormSubmitterContract.IFormSubmitter {
         } else {
             status = CollectFormInstanceStatus.SUBMISSION_ERROR;
         }
-
+        Timber.d("++++++ setErrorSubmissionStatuses, instance: %s, %d, status: %s -> %s", instance.getFormName(), instance.getId(), startStatus.name(), instance.getStatus().name());
         instance.setStatus(status);
     }
 

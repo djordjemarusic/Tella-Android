@@ -583,6 +583,7 @@ public class CollectFormEntryActivity extends MetadataActivity implements
 
     @Override
     public void formInstanceSaveSuccess(CollectFormInstance instance) {
+        Timber.d("++++++ formInstanceSaveSuccess, instance: %s ", instance.getFormName());
         Toast.makeText(this, getFormSaveMsg(instance), Toast.LENGTH_SHORT).show();
         formParser.startFormChangeTracking();
         MyApplication.bus().post(new CollectFormSavedEvent());
@@ -590,6 +591,7 @@ public class CollectFormEntryActivity extends MetadataActivity implements
 
     @Override
     public void formInstanceAutoSaveSuccess(CollectFormInstance instance) {
+        Timber.d("++++++ formInstanceAutoSaveSuccess, instance: %s ", instance.getFormName());
         Toast.makeText(this, getFormSaveMsg(instance), Toast.LENGTH_SHORT).show();
         formParser.startFormChangeTracking();
         draftAutoSaved = true;
@@ -631,6 +633,7 @@ public class CollectFormEntryActivity extends MetadataActivity implements
 
     @Override
     public void formSubmitError(Throwable error) {
+        Timber.d("++++++ formSubmitError, error: %s ", error.getMessage());
         String errorMessage = FormUtils.getFormSubmitErrorMessage(this, error);
 
         Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
@@ -655,6 +658,7 @@ public class CollectFormEntryActivity extends MetadataActivity implements
 
     @Override
     public void formPartSubmitStart(CollectFormInstance instance, String partName) {
+        Timber.d("++++++ formPartSubmitStart, instance: %s, %d ", instance.getFormName(), instance.getId());
         endView.showUploadProgress(partName);
         invalidateOptionsMenu();
         toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
@@ -667,6 +671,7 @@ public class CollectFormEntryActivity extends MetadataActivity implements
 
     @Override
     public void formPartSubmitSuccess(CollectFormInstance instance, OpenRosaPartResponse response) {
+        Timber.d("++++++ formPartSubmitStart, instance: %s, %d, OpenRosaPartResponse %s ", instance.getFormName(), instance.getId(), response.getMessages().get(0));
         endView.hideUploadProgress(response.getPartName());
     }
 
@@ -678,6 +683,7 @@ public class CollectFormEntryActivity extends MetadataActivity implements
 
     @Override
     public void formPartsSubmitEnded(CollectFormInstance instance) {
+        Timber.d("++++++ formPartsSubmitEnded, instance: %s, %d", instance.getFormName(), instance.getId());
         Toast.makeText(getApplicationContext(), getString(R.string.collect_toast_form_submitted), Toast.LENGTH_LONG).show();
         MyApplication.bus().post(new CollectFormSubmittedEvent());
         finish();
