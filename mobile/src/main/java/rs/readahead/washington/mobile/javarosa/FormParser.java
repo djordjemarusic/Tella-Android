@@ -20,6 +20,8 @@ import rs.readahead.washington.mobile.domain.entity.collect.FormMediaFile;
 import rs.readahead.washington.mobile.odk.FormController;
 import rs.readahead.washington.mobile.odk.exception.JavaRosaException;
 import rs.readahead.washington.mobile.views.collect.CollectFormView;
+import rs.readahead.washington.mobile.views.collect.WidgetValueChangedListener;
+import rs.readahead.washington.mobile.views.collect.widgets.QuestionWidget;
 import timber.log.Timber;
 
 
@@ -222,6 +224,15 @@ public class FormParser implements IFormParserContract.IFormParser {
 
                 case FormEntryController.EVENT_GROUP:
                     getViewParameters();
+                    int f=1;
+                    Timber.d("+++ Event group");
+                    for (FormEntryCaption g : groups) {
+                        Timber.d("++++ Group %d", f);
+                    }
+                    for (FormEntryPrompt p : prompts) {
+                        Timber.d("+++ Prompt %d", f);
+                        f++;
+                    }
                     view.formGroup(prompts, groups);
                     break;
 
@@ -292,4 +303,5 @@ public class FormParser implements IFormParserContract.IFormParser {
 
         void found(Type type, FormIndex formIndex);
     }
+
 }

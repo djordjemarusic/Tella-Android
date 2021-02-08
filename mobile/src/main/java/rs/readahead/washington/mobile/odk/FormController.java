@@ -15,6 +15,8 @@ package rs.readahead.washington.mobile.odk;
 
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+
 import org.javarosa.core.model.FormDef;
 import org.javarosa.core.model.FormIndex;
 import org.javarosa.core.model.GroupDef;
@@ -28,6 +30,7 @@ import org.javarosa.core.model.data.IAnswerData;
 import org.javarosa.core.model.data.StringData;
 import org.javarosa.core.model.instance.FormInstance;
 import org.javarosa.core.model.instance.TreeElement;
+import org.javarosa.core.model.instance.TreeReference;
 import org.javarosa.core.services.transport.payload.ByteArrayPayload;
 import org.javarosa.form.api.FormEntryCaption;
 import org.javarosa.form.api.FormEntryController;
@@ -621,6 +624,41 @@ public class FormController {
         return getEvent();
     }
 
+    /**
+     * Returns true if the index is either a repeatable group or a visible group.
+     */
+    public boolean isDisplayableGroup(FormIndex index) {
+        int event = getEvent(index);
+        return event == FormEntryController.EVENT_REPEAT
+                || event == FormEntryController.EVENT_PROMPT_NEW_REPEAT
+                || (event == FormEntryController.EVENT_GROUP
+                && isPresentationGroup(index) && isLogicalGroup(index));
+    }
+
+    /**
+     * Returns true if the group has a displayable label,
+     * i.e. it's a "presentation group".
+     */
+    private boolean isPresentationGroup(FormIndex groupIndex) {
+        String label = getCaptionPrompt(groupIndex).getShortText();
+        return label != null;
+    }
+
+    /**
+     * Returns true if the group has an XML `ref` attribute,
+     * i.e. it's a "logical group".
+     * <p>
+     * TODO: Improve this nasty way to recreate what XFormParser#parseGroup does for nodes without a `ref`.
+     */
+    private boolean isLogicalGroup(FormIndex groupIndex) {
+        TreeReference groupRef = groupIndex.getReference();
+        TreeReference parentRef = groupRef.getParentRef();
+        IDataReference absRef = FormDef.getAbsRef(new XPathReference(groupRef), parentRef);
+        IDataReference bindRef = getCaptionPrompt(groupIndex).getFormElement().getBind();
+        // If the group's bind is equal to what it would have been set to during parsing, it must not have a ref.
+        return !absRef.equals(bindRef);
+    }
+
 
     public static class FailedConstraint {
         public final FormIndex index;
@@ -660,6 +698,24 @@ public class FormController {
         return null;
     }
 
+
+    public FailedConstraint saveOneScreenAnswer(FormIndex index, IAnswerData answer, boolean evaluateConstraints) throws JavaRosaException {
+        // Within a group, you can only save for question events
+        if (getEvent(index) == FormEntryController.EVENT_QUESTION) {
+            if (evaluateConstraints) {
+                int saveStatus = answerQuestion(index, answer);
+                if (saveStatus != FormEntryController.ANSWER_OK) {
+                    return new FailedConstraint(index, saveStatus);
+                }
+            } else {
+                saveAnswer(index, answer);
+            }
+        } else {
+            Timber.w("Attempted to save an index referencing something other than a question: %s",
+                    index.getReference().toString());
+        }
+        return null;
+    }
 
     /**
      * Navigates backward in the form.

@@ -15,9 +15,13 @@ package rs.readahead.washington.mobile.views.collect.widgets;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+
 import androidx.core.content.ContextCompat;
+
+import android.text.Editable;
 import android.text.Selection;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
@@ -48,6 +52,21 @@ public class StringWidget extends QuestionWidget {
 
         answer = new EditText(context);
         answer.setId(QuestionWidget.newUniqueId());
+        answer.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                widgetValueChanged();
+            }
+        });
+
         readOnly = prompt.isReadOnly() || readOnlyOverride;
 
         TableLayout.LayoutParams params = new TableLayout.LayoutParams();
@@ -94,6 +113,7 @@ public class StringWidget extends QuestionWidget {
     @Override
     public void clearAnswer() {
         answer.setText(null);
+        widgetValueChanged();
     }
 
     @Override
@@ -104,6 +124,7 @@ public class StringWidget extends QuestionWidget {
         if (TextUtils.isEmpty(s)) {
             return null;
         } else {
+            widgetValueChanged();
             return new StringData(s);
         }
     }

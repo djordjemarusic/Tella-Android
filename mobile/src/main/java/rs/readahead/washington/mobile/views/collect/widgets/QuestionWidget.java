@@ -44,6 +44,7 @@ import rs.readahead.washington.mobile.R;
 import rs.readahead.washington.mobile.odk.FormController;
 import rs.readahead.washington.mobile.odk.exception.JavaRosaException;
 import rs.readahead.washington.mobile.util.StringUtils;
+import rs.readahead.washington.mobile.views.collect.WidgetValueChangedListener;
 import timber.log.Timber;
 
 
@@ -68,6 +69,8 @@ public abstract class QuestionWidget extends RelativeLayout {
     private LinearLayout questionHeader;
     private TextView helpTextView;
     private TextView constraintValidationView;
+
+    private WidgetValueChangedListener valueChangedListener;
 
     public QuestionWidget(Context context, @NonNull FormEntryPrompt formEntryPrompt) {
         super(context);
@@ -266,5 +269,17 @@ public abstract class QuestionWidget extends RelativeLayout {
 
     protected View getQuestionRootView() {
         return questionHeader;
+    }
+
+    public void setValueChangedListener(WidgetValueChangedListener valueChangedListener) {
+        Timber.d("++++ QuestionWidget: setValueChangedListener");
+        this.valueChangedListener = valueChangedListener;
+    }
+
+    public void widgetValueChanged() {
+        Timber.d("++++ QuestionWidget: widgetValueChanged()");
+        if (valueChangedListener != null) {
+            valueChangedListener.widgetValueChanged(this);
+        }
     }
 }
