@@ -230,7 +230,7 @@ public class FormParser implements IFormParserContract.IFormParser {
                         Timber.d("++++ Group %d", f);
                     }
                     for (FormEntryPrompt p : prompts) {
-                        Timber.d("+++ Prompt %d", f);
+                        Timber.d("+++ Prompt %d, question: %s, index %d", f, p.getQuestionText(), p.getIndex().getLocalIndex());
                         f++;
                     }
                     view.formGroup(prompts, groups);

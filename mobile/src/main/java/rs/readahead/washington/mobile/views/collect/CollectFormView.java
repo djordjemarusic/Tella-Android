@@ -84,15 +84,15 @@ public class CollectFormView extends LinearLayout implements WidgetValueChangedL
 
         int id = 0;
         for (FormEntryPrompt p : questionPrompts) {
-            Timber.d("++++ FormEntryPrompt %s", p.getQuestionText());
+          //  Timber.d("++++ FormEntryPrompt %s", p.getQuestionText());
             if (id > 0) {
                 LinearLayout separator = new LinearLayout(getContext());
-                Timber.d("++++ separator");
+               // Timber.d("++++ separator");
                 inflater.inflate(R.layout.collect_form_delimiter, separator, true);
                 addView(separator, widgetLayout);
             }
             QuestionWidget qw = WidgetFactory.createWidgetFromPrompt(p, getContext(), readOnlyOverride);
-            Timber.d("++++ QuestionWidget");
+            //Timber.d("++++ QuestionWidget");
             qw.setId(VIEW_ID + id++);
             widgets.add(qw);
             qw.setValueChangedListener(this);
@@ -219,9 +219,9 @@ public class CollectFormView extends LinearLayout implements WidgetValueChangedL
             //runOnUiThread(new Runnable() {FormEntryActivity.this.
 
             try {
-                Timber.d("++++ update questions, %s", changedWidget.getPrompt().getQuestionText());
+                Timber.d("++++ update questions, %s, index :%d", changedWidget.getPrompt().getQuestionText(), changedWidget.getPrompt().getIndex().getInstanceIndex());
                 updateFieldListQuestions(changedWidget.getPrompt().getIndex());
-
+                   /*
                 this.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                     @Override
                     public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
@@ -231,6 +231,7 @@ public class CollectFormView extends LinearLayout implements WidgetValueChangedL
                         this.removeOnLayoutChangeListener(this);
                     }
                 });
+                */
             } catch (Throwable e) {
                 Timber.d("++++ error %s", e.getMessage());
                 Timber.e(e);
@@ -243,6 +244,7 @@ public class CollectFormView extends LinearLayout implements WidgetValueChangedL
     /**
      * Returns true if any part of the question widget is currently on the screen or false otherwise.
      */
+    /*
     public boolean isDisplayed(QuestionWidget qw) {
         Rect scrollBounds = new Rect();
         findViewById(R.id.odk_view_container).getHitRect(scrollBounds);
@@ -254,7 +256,7 @@ public class CollectFormView extends LinearLayout implements WidgetValueChangedL
             findViewById(R.id.odk_view_container).scrollTo(0, qw.getTop());
         }
     }
-
+*/
     /**
      * Saves the form and updates displayed widgets accordingly:
      * - removes widgets corresponding to questions that are no longer relevant
@@ -269,7 +271,9 @@ public class CollectFormView extends LinearLayout implements WidgetValueChangedL
         // Save the user-visible state for all questions in this field-list
         FormEntryPrompt[] questionsBeforeSave = FormController.getActive().getQuestionPrompts();
         List<ImmutableDisplayableQuestion> immutableQuestionsBeforeSave = new ArrayList<>();
+        Timber.d("+++ immutable Questions Before Save :");
         for (FormEntryPrompt questionBeforeSave : questionsBeforeSave) {
+            Timber.d("+++ %s : %d", questionBeforeSave.getQuestionText(), questionBeforeSave.getIndex().getLocalIndex() );
             immutableQuestionsBeforeSave.add(new ImmutableDisplayableQuestion(questionBeforeSave));
         }
 
@@ -278,7 +282,9 @@ public class CollectFormView extends LinearLayout implements WidgetValueChangedL
         FormEntryPrompt[] questionsAfterSave = FormController.getActive().getQuestionPrompts();
 
         Map<FormIndex, FormEntryPrompt> questionsAfterSaveByIndex = new HashMap<>();
+        Timber.d("+++ Questions after Save :");
         for (FormEntryPrompt question : questionsAfterSave) {
+            Timber.d("+++ %s : %d", question.getQuestionText(), question.getIndex().getLocalIndex() );
             questionsAfterSaveByIndex.put(question.getIndex(), question);
         }
 
@@ -295,10 +301,12 @@ public class CollectFormView extends LinearLayout implements WidgetValueChangedL
             // Always rebuild questions that use database-driven external data features since they
             // bypass SelectChoices stored in ImmutableDisplayableQuestion
             if (questionBeforeSave.sameAs(questionAtSameFormIndex)
-                    && !FormController.getActive().usesDatabaseExternalDataFeature(questionBeforeSave.getFormIndex())) {//
+                    ) {//&& !FormController.getActive().usesDatabaseExternalDataFeature(questionBeforeSave.getFormIndex())
                 questionsThatHaveNotChanged.add(questionAtSameFormIndex);
+                Timber.d("+++  add to NEpromenjena pitanja %d", questionBeforeSave.getFormIndex().getLocalIndex() );
             } else if (!lastChangedIndex.equals(questionBeforeSave.getFormIndex())) {
                 formIndexesToRemove.add(questionBeforeSave.getFormIndex());
+                Timber.d("+++  add to promenjena pitanja %d", questionBeforeSave.getFormIndex().getLocalIndex() );
             }
         }
 
@@ -306,6 +314,7 @@ public class CollectFormView extends LinearLayout implements WidgetValueChangedL
             ImmutableDisplayableQuestion questionBeforeSave = immutableQuestionsBeforeSave.get(i);
 
             if (formIndexesToRemove.contains(questionBeforeSave.getFormIndex())) {
+                Timber.d("+++ odkView.removeWidgetAt %d", questionBeforeSave.getFormIndex().getInstanceIndex());
                 removeWidgetAt(i);
             }
         }
@@ -316,21 +325,28 @@ public class CollectFormView extends LinearLayout implements WidgetValueChangedL
                 // The values of widgets in intent groups are set by the view so widgetValueChanged
                 // is never called. This means readOnlyOverride can always be set to false.
                 addWidgetForQuestion(questionsAfterSave[i], i);
+                Timber.d("+++ odkView.addWidgetForQuestion %d, %s", i, questionsAfterSave[i].getQuestionText() );
             }
         }
+
     }
 
     // The method saves questions one by one in order to support calculations in field-list groups
     private void saveAnswersForCurrentScreen(FormEntryPrompt[] mutableQuestionsBeforeSave, List<ImmutableDisplayableQuestion> immutableQuestionsBeforeSave) {
         Timber.d("+++ saveAnswersForCurrentScreen");
         Timber.d("+++ mutableQuestionsBeforeSave:");
+        int t=1;
         for (FormEntryPrompt p: mutableQuestionsBeforeSave){
-            Timber.d("+++ %s", p.getQuestionText());
+            Timber.d("+++ %d. %s", t, p.getQuestionText());
+            t++;
         }
 
         Timber.d("+++ immutableQuestionsBeforeSave:");
+        int tt=1;
+
         for (ImmutableDisplayableQuestion q: immutableQuestionsBeforeSave){
-            Timber.d("+++ %s", q.toString());
+            Timber.d("+++ %d. %s", tt,  q.toString());
+            tt++;
         }
 
         FormController formController = FormController.getActive();
